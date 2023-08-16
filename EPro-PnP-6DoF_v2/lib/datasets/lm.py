@@ -23,6 +23,8 @@ from glob import glob
 import random 
 from utils.eval import calc_rt_dist_m 
 
+np.bool = np.bool_
+
 class LM(data.Dataset):
     def __init__(self, cfg, split):
         self.cfg = cfg

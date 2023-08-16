@@ -7,7 +7,7 @@ https://github.com/LZGMatrix/CDPN_ICCV2019_ZhigangLi
 
 import torch
 from torch.utils import model_zoo
-from torchvision.models.resnet import model_urls, BasicBlock, Bottleneck
+from torchvision.models.resnet import ResNet34_Weights, BasicBlock, Bottleneck
 import os, sys
 
 cur_dir = os.path.dirname(os.path.abspath(__file__))
@@ -88,7 +88,7 @@ def build_model(cfg):
         if 'resnet' in cfg.network.arch:
             logger.info("=> loading official model from model zoo for backbone")
             _, _, _, name = resnet_spec[cfg.network.back_layers_num]
-            official_resnet = model_zoo.load_url(model_urls[name])
+            official_resnet = model_zoo.load_url(ResNet34_Weights.IMAGENET1K_V1)
             # drop original resnet fc layer, add 'None' in case of no fc layer, that will raise error
             official_resnet.pop('fc.weight', None)
             official_resnet.pop('fc.bias', None)
